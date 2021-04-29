@@ -29,7 +29,7 @@ const encode = '\FlixTech\AvroSerializer\Protocol\encode';
 
 function encode(int $protocolVersion, int $schemaId, string $avroEncodedBinaryString): Either
 {
-    $packed = @\pack('CNA*', $protocolVersion, $schemaId, $avroEncodedBinaryString);
+    $packed = @\pack('CNa*', $protocolVersion, $schemaId, $avroEncodedBinaryString);
 
     return false !== $packed
         ? Right::of($packed)
@@ -57,7 +57,7 @@ const decode = '\FlixTech\AvroSerializer\Protocol\decode';
 function decode(string $binaryString): Either
 {
     $packedFormat = \sprintf(
-        'C%s/N%s/A*%s',
+        'C%s/N%s/a*%s',
         PROTOCOL_ACCESSOR_VERSION,
         PROTOCOL_ACCESSOR_SCHEMA_ID,
         PROTOCOL_ACCESSOR_AVRO
